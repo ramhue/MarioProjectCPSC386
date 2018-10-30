@@ -1,6 +1,3 @@
-# Aaron Xaymountry
-# CPSC 386-01
-# MW 5:30-6:45pm
 # Mario game functions
 
 import pygame
