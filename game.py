@@ -21,7 +21,7 @@ class Game():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RIGHT:
                         self.backrect.x -= 10*self.scale
-                    elif event.key  == pygame.K_LEFT:
+                    elif event.key == pygame.K_LEFT:
                         self.backrect.x += 10*self.scale
             self.screen.blit(self.background, self.backrect)
             pygame.display.flip()
