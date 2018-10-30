@@ -1,32 +1,37 @@
+# Mario Game main function
+
 import pygame
-from spritesheet import SpriteSheet
+import game_functions as gf
+from settings import Settings
+from stage_background import Stage_Background
+from mario import Mario
+from goomba import Goomba
 
-class Game():
+BLACK = (0, 0, 0)
+WHITE = (250, 250, 250)
+BLUE = (132, 112, 255)
 
-    def __init__(self):
 
-        self.scale = 3
+def Game():
+    pygame.init()
+    gamesettings = Settings()
+    scale = 3
+    screen = pygame.display.set_mode((256 * scale, 224 * scale))
+    pygame.display.set_caption("Super Mario")
+    background = Stage_Background(screen)
+    player = Mario(screen, gamesettings)
+    thegoomba = Goomba(screen, gamesettings)
+    screen.fill(BLACK)
 
-        pygame.init()
-        self.background = pygame.image.load('background.png')
-        self.background = pygame.transform.scale(self.background, (self.background.get_width()*self.scale,
-                                                                   self.background.get_height()*self.scale))
-        self.screen = pygame.display.set_mode((256*self.scale, 224*self.scale))
-
-        self.camera = self.screen.get_rect()
-        self.camera.x = 0
-
-    def play(self):
-        while True:
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_RIGHT:
-                        self.camera.x += 10*self.scale
-                    elif event.key == pygame.K_LEFT:
-                        self.camera.x -= 10*self.scale
-            self.screen.blit(self.background, (0, 0), self.camera)
-            pygame.display.flip()
-
+    while True:
+        screen.fill(BLACK)
+        # CHANGE TO MARIO
+        gf.check_events(player, thegoomba, background)
+        background.blitbackground()
+        thegoomba.blitGoomba()
+        player.blitMario()
+        pygame.display.flip()
 
 game = Game()
 game.play()
+
