@@ -1,7 +1,4 @@
-# Aaron Xaymountry
-# CPSC 386-01
-# MW 5:30-6:45pm
-# Mario background
+# Mario world 1-1 background
 
 import pygame
 
