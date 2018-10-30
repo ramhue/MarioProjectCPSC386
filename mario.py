@@ -1,4 +1,4 @@
-# Goomba enemy class
+# Mario player class
 
 import pygame
 from settings import Settings
