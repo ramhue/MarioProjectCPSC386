@@ -8,24 +8,40 @@ from gameStats import GameStats
 from mario import Mario
 from goomba import Goomba
 
+class Game():
+    def __init__(self):
+        pygame.init()
+        self.scale = 3
+        self.screen = pygame.display.set_mode((1024, 224 * self.scale))
+        self.gamesettings = Settings(self.screen)
+        pygame.display.set_caption("Super Mario")
+        # self.background = Stage_Background(self.screen)
+        self.background = pygame.image.load('images/marioW1.png')
+        self.background = pygame.transform.scale(self.background, (self.background.get_width() * self.scale,
+                                                                   self.background.get_height() * self.scale))
+        self.rect = self.background.get_rect()
+        self.level = pygame.Surface((self.rect.width, self.rect.height))
+        self.player = Mario(self.level, self.gamesettings)
+        self.thegoomba = Goomba(self.level, self.gamesettings)
+        self.stats = GameStats(self.screen, self.gamesettings)
+        
+    def play(self):
+        while True:
+            # CHANGE TO MARIO
+            gf.check_events(self.player, self.thegoomba, self.background)
+            # self.background.blitbackground()
+            self.blit()
 
-def Game():
-    pygame.init()
-    gamesettings = Settings()
-    screen = pygame.display.set_mode((256 * gamesettings.scale, 224 * gamesettings.scale))
-    pygame.display.set_caption("Super Mario")
-    background = Stage_Background(screen)
-    stats = GameStats(screen, gamesettings)
-    player = Mario(screen, gamesettings)
-    thegoomba = Goomba(screen, gamesettings)
+    # Blit everything to self.level then blit self.level
+    def blit(self):
+        self.level.blit(self.background, self.gamesettings.camera, self.gamesettings.camera)
+        self.thegoomba.blitGoomba()
+        self.player.update()
+        self.screen.blit(self.level, (0, 0), self.gamesettings.camera)
+        self.stats.blitstats()
 
-    while True:
-        gf.check_events(player, thegoomba, background)
-        background.blitbackground()
-        stats.blitstats()
-        thegoomba.blitGoomba()
-        player.blitMario()
         pygame.display.flip()
+
 
 game = Game()
 game.play()
