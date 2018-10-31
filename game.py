@@ -21,7 +21,7 @@ class Game():
                                                                    self.background.get_height() * self.scale))
         self.rect = self.background.get_rect()
         self.level = pygame.Surface((self.rect.width, self.rect.height))
-        self.player = Mario(self.level, self.gamesettings)
+        self.player = Mario(self.screen, self.gamesettings, self.level)
         self.thegoomba = Goomba(self.level, self.gamesettings)
         self.stats = GameStats(self.screen, self.gamesettings)
         

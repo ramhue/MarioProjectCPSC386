@@ -5,7 +5,7 @@ from settings import Settings
 from pygame.sprite import Sprite
 
 class Mario(Sprite):
-    def __init__(self, screen, settings):
+    def __init__(self, screen, settings, level):
         super(Mario, self).__init__()
         self.screen = screen
         self.settings = settings
@@ -18,6 +18,8 @@ class Mario(Sprite):
         img = pygame.transform.scale(img, (self.height, self.width))
         self.rect = img.get_rect()
         self.image = img
+
+        self.level = level
 
         self.moveLeft = False
         self.moveRight = False
@@ -32,4 +34,4 @@ class Mario(Sprite):
         self.blitMario()
 
     def blitMario(self):
-        self.screen.blit(self.image, self.rect)
+        self.level.blit(self.image, self.rect)
