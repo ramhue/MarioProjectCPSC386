@@ -17,22 +17,22 @@ class GameStats():
         self.font = pygame.font.Font('images/ARCADECLASSIC.TTF', 36)
         self.Scores = self.font.render("SCORE", 2, WHITE)
         self.ScoresPos = self.Scores.get_rect()
-        self.ScoresPos = (((self.settings.screen_width / 2) - 475), (self.settings.screen_height / 2) - 275)
+        self.ScoresPos = (((self.settings.screen_width / 2) - 475), (self.settings.screen_height / 2) - 325)
 
         # Coins display text
         self.Coins = self.font.render("COINS", 2, WHITE)
         self.CoinsPos = self.Coins.get_rect()
-        self.CoinsPos = ((self.settings.screen_width / 2) - 275, (self.settings.screen_height / 2) - 275)
+        self.CoinsPos = ((self.settings.screen_width / 2) - 200, (self.settings.screen_height / 2) - 325)
 
         # Time display text
         self.Time = self.font.render("TIME", 2, WHITE)
         self.TimePos = self.Time.get_rect()
-        self.TimePos = ((self.settings.screen_width / 2) - 75, (self.settings.screen_height / 2) - 275)
+        self.TimePos = ((self.settings.screen_width / 2) + 100, (self.settings.screen_height / 2) - 325)
 
         # Lives display text
         self.Lives = self.font.render("LIVES", 2, WHITE)
         self.LivesPos = self.Lives.get_rect()
-        self.LivesPos = ((self.settings.screen_width / 2) + 125, (self.settings.screen_height / 2) - 275)
+        self.LivesPos = ((self.settings.screen_width / 2) + 375, (self.settings.screen_height / 2) - 325)
 
     def blitstats(self):
         self.screen.blit(self.Scores, self.ScoresPos)
