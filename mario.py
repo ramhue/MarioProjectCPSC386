@@ -9,26 +9,32 @@ class Mario(Sprite):
         super(Mario, self).__init__()
         self.screen = screen
         self.settings = settings
+        self.level = level
         self.width = 50
         self.height = 50
         self.x = settings.screen_width
         self.y = settings.screen_height
-        self.pos = (((self.x / 2) - 400), (self.y - 120))
         img = pygame.image.load('images/Mario_Sprite.jpg')
         img = pygame.transform.scale(img, (self.height, self.width))
         self.rect = img.get_rect()
         self.image = img
 
-        self.level = level
+        # Set starting Y:
+        self.rect.y = 550
 
         self.moveLeft = False
         self.moveRight = False
         self.moveUp = False
         self.moveDown = False
 
+        # TEMPORARY: Flag to check if camera is moving
+        self.cameraMove = False
+
     def update(self):
         super().update()
         if self.moveRight:
+            self.rect.x += 1
+        if self.cameraMove:
             self.settings.camera.x += 1
 
         self.blitMario()

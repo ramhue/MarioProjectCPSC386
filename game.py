@@ -13,14 +13,20 @@ class Game():
         pygame.init()
         self.scale = 3
         self.screen = pygame.display.set_mode((1024, 224 * self.scale))
-        self.gamesettings = Settings(self.screen)
         pygame.display.set_caption("Super Mario")
-        # self.background = Stage_Background(self.screen)
+
+        self.gamesettings = Settings(self.screen)
+
+        # Background Image for level
         self.background = pygame.image.load('images/marioW1.png')
         self.background = pygame.transform.scale(self.background, (self.background.get_width() * self.scale,
                                                                    self.background.get_height() * self.scale))
         self.rect = self.background.get_rect()
+        # Create Surface called Level that will hold everythin
+        # g within the level
+        # (Player, enemy, background, colliders, items)
         self.level = pygame.Surface((self.rect.width, self.rect.height))
+
         self.player = Mario(self.screen, self.gamesettings, self.level)
         self.thegoomba = Goomba(self.level, self.gamesettings)
         self.stats = GameStats(self.screen, self.gamesettings)

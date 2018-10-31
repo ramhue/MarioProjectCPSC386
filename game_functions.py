@@ -20,6 +20,7 @@ def check_keydown_events(event, mario, goomba, background):
     """Respond to keypresses."""
     if event.key == pygame.K_UP:
         mario.moving_up = True
+        mario.cameraMove = True
     elif event.key == pygame.K_DOWN:
         mario.moving_down = True
     elif event.key == pygame.K_RIGHT:
@@ -40,10 +41,12 @@ def check_keyup_events(event, mario):
     """Respond to key releases."""
     if event.key == pygame.K_RIGHT:
         mario.moving_right = False
+        mario.moveRight = False
     elif event.key == pygame.K_LEFT:
         mario.moving_left = False
     elif event.key == pygame.K_UP:
         mario.moving_up = False
+        mario.cameraMove = False
     elif event.key == pygame.K_DOWN:
         mario.moving_down = False
 
