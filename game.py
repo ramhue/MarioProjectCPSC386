@@ -4,14 +4,12 @@ import pygame
 import game_functions as gf
 from settings import Settings
 from stage_background import Stage_Background
+from gameStats import GameStats
 from mario import Mario
 from goomba import Goomba
 
-BLACK = (0, 0, 0)
-WHITE = (250, 250, 250)
-BLUE = (132, 112, 255)
 
-
+<<<<<<< HEAD
 class Game():
     def __init__(self):
         pygame.init()
@@ -43,6 +41,24 @@ class Game():
         self.thegoomba.blitGoomba()
         self.player.update()
         self.screen.blit(self.level, (0, 0), self.gamesettings.camera)
+=======
+def Game():
+    pygame.init()
+    gamesettings = Settings()
+    screen = pygame.display.set_mode((256 * gamesettings.scale, 224 * gamesettings.scale))
+    pygame.display.set_caption("Super Mario")
+    background = Stage_Background(screen)
+    stats = GameStats(screen, gamesettings)
+    player = Mario(screen, gamesettings)
+    thegoomba = Goomba(screen, gamesettings)
+
+    while True:
+        gf.check_events(player, thegoomba, background)
+        background.blitbackground()
+        stats.blitstats()
+        thegoomba.blitGoomba()
+        player.blitMario()
+>>>>>>> master
         pygame.display.flip()
 
 
