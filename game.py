@@ -33,7 +33,7 @@ class Game():
         self.thegoomba = Goomba(self.level, self.gamesettings)
         self.stats = GameStats(self.screen, self.gamesettings)
 
-        self.blocks = Group()
+        self.pipes = Group()
         self.createblocks()
         
     def play(self):
@@ -48,7 +48,7 @@ class Game():
         self.level.blit(self.background, self.gamesettings.camera, self.gamesettings.camera)
         self.thegoomba.blitGoomba()
         self.player.update()
-        self.blocks.draw(self.level)
+        self.pipes.draw(self.level)
         self.screen.blit(self.level, (0, 0), self.gamesettings.camera)
 
         self.stats.blitstats()
@@ -56,7 +56,13 @@ class Game():
         pygame.display.flip()
 
     def createblocks(self):
-        self.blocks.add(blockRect(447, 168, 32, 32, self.gamesettings.scale))
+        # Create Pipes
+        self.pipes.add(blockRect(447, 168, 32, 32, self.gamesettings.scale)) # Pipe 1
+        self.pipes.add(blockRect(607, 152, 32, 48, self.gamesettings.scale)) # Pipe 2
+        self.pipes.add(blockRect(735, 136, 32, 64, self.gamesettings.scale)) # Pipe 2
+        self.pipes.add(blockRect(911, 136, 32, 64, self.gamesettings.scale)) # Pipe 3
+        self.pipes.add(blockRect(2607, 168, 32, 32, self.gamesettings.scale)) # Pipe 4
+        self.pipes.add(blockRect(2863, 168, 32, 32, self.gamesettings.scale)) # Pipe 5
 
 game = Game()
 game.play()

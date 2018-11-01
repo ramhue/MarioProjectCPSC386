@@ -9,4 +9,5 @@ class blockRect(Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x*scale
         self.rect.y = y*scale
-        self.image.fill((0, 0, 0))
+        # Temporary to visualize blocks
+        self.image.fill((255, 0, 0))

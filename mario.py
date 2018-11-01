@@ -34,7 +34,7 @@ class Mario(Sprite):
         if self.moveRight:
             self.rect.x += 1
         if self.cameraMove:
-            self.settings.camera.x += 1
+            self.settings.camera.x += 5
 
         self.blitMario()
 
