@@ -14,10 +14,9 @@ class Mario(Sprite):
         self.height = 50
         self.x = settings.screen_width
         self.y = settings.screen_height
-        img = pygame.image.load('images/Mario_Sprite.jpg')
-        img = pygame.transform.scale(img, (self.height, self.width))
-        self.rect = img.get_rect()
-        self.image = img
+        self.image = pygame.image.load('images/Mario_Sprite.jpg')
+        self.image = pygame.transform.scale(self.image, (self.height, self.width))
+        self.rect = self.image.get_rect()
 
         # Set starting Y:
         self.rect.y = 550

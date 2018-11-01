@@ -7,6 +7,8 @@ from stage_background import Stage_Background
 from gameStats import GameStats
 from mario import Mario
 from goomba import Goomba
+from pygame.sprite import Group
+from blockrect import blockRect
 
 class Game():
     def __init__(self):
@@ -30,6 +32,9 @@ class Game():
         self.player = Mario(self.screen, self.gamesettings, self.level)
         self.thegoomba = Goomba(self.level, self.gamesettings)
         self.stats = GameStats(self.screen, self.gamesettings)
+
+        self.blocks = Group()
+        self.createblocks()
         
     def play(self):
         while True:
@@ -43,11 +48,15 @@ class Game():
         self.level.blit(self.background, self.gamesettings.camera, self.gamesettings.camera)
         self.thegoomba.blitGoomba()
         self.player.update()
+        self.blocks.draw(self.level)
         self.screen.blit(self.level, (0, 0), self.gamesettings.camera)
+
         self.stats.blitstats()
 
         pygame.display.flip()
 
+    def createblocks(self):
+        self.blocks.add(blockRect(447, 168, 32, 32, self.gamesettings.scale))
 
 game = Game()
 game.play()
