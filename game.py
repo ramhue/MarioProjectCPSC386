@@ -31,10 +31,32 @@ class Game():
         # (Player, enemy, background, colliders, items)
         self.level = pygame.Surface((self.rect.width, self.rect.height))
 
-        self.thegoomba = Group()
+        # Add mario to the game
         self.player = Mario(self.screen, self.gamesettings, self.level)
-        self.thegoomba.add(Goomba(self.level, self.gamesettings, 352, 550))
-        self.thekoopa = Koopa(self.level, self.gamesettings)
+
+        # Add all goombas
+        self.thegoomba = Group()
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 352, 184))
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 640, 184))
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 815, 184))
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 840, 184))
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 1280, 55))
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 1310, 55))
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 1555, 184))
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 1580, 184))
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 1820, 184))
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 1842, 184))
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 1985, 184))
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 2008, 184))
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 2045, 184))
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 2068, 184))
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 2785, 184))
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 2808, 184))
+
+        # Add koopa
+        self.thekoopa = Koopa(self.level, self.gamesettings, 1717, 178)
+
+        # Game stats
         self.stats = GameStats(self.screen, self.gamesettings)
 
         self.pipes = Group()

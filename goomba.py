@@ -26,7 +26,7 @@ class Goomba(Sprite):
 
         self.image = self.images[0]
         self.rect = self.images[0].get_rect()
-        self.rect.x, self.rect.y = x * self.settings.scale, y
+        self.rect.x, self.rect.y = x * self.settings.scale, y * self.settings.scale
 
     def blitGoomba(self):
         if pygame.time.get_ticks() > self.last + 500:
