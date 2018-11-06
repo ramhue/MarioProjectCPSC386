@@ -7,6 +7,8 @@ from stage_background import Stage_Background
 from gameStats import GameStats
 from mario import Mario
 from goomba import Goomba
+from koopa import Koopa
+from pygame.sprite import Group
 
 class Game():
     def __init__(self):
@@ -27,8 +29,10 @@ class Game():
         # (Player, enemy, background, colliders, items)
         self.level = pygame.Surface((self.rect.width, self.rect.height))
 
+        self.thegoomba = Group()
         self.player = Mario(self.screen, self.gamesettings, self.level)
-        self.thegoomba = Goomba(self.level, self.gamesettings)
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 352, 550))
+        self.thekoopa = Koopa(self.level, self.gamesettings)
         self.stats = GameStats(self.screen, self.gamesettings)
         
     def play(self):
@@ -41,7 +45,9 @@ class Game():
     # Blit everything to self.level then blit self.level
     def blit(self):
         self.level.blit(self.background, self.gamesettings.camera, self.gamesettings.camera)
-        self.thegoomba.blitGoomba()
+        for goomba in self.thegoomba:
+            goomba.blitGoomba()
+        self.thekoopa.blitKoopa()
         self.player.update()
         self.screen.blit(self.level, (0, 0), self.gamesettings.camera)
         self.stats.blitstats()
