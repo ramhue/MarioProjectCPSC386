@@ -3,6 +3,7 @@
 import pygame
 from settings import Settings
 from pygame.sprite import Sprite
+from spritesheet import SpriteSheet
 
 class Mario(Sprite):
     def __init__(self, screen, settings, level):
@@ -10,14 +11,15 @@ class Mario(Sprite):
         self.screen = screen
         self.settings = settings
         self.level = level
-        self.width = 50
-        self.height = 50
-        self.x = settings.screen_width
-        self.y = settings.screen_height
-        img = pygame.image.load('images/Mario_Sprite.jpg')
-        img = pygame.transform.scale(img, (self.height, self.width))
-        self.rect = img.get_rect()
-        self.image = img
+        self.spritesheet = SpriteSheet('images/mario.png')
+        self.smallimages = list()
+        for x in range(14):
+            self.smallimages.append(self.spritesheet.get_image(80+(x*17), 34, 16, 16))
+            self.smallimages[x] = pygame.transform.scale(self.smallimages[x],
+                                                         (self.smallimages[x].get_width()*self.settings.scale,
+                                                         self.smallimages[x].get_height()*self.settings.scale))
+        self.image = self.smallimages[0]
+        self.rect = self.image.get_rect()
 
         # Set starting Y:
         self.rect.y = 550
@@ -33,9 +35,10 @@ class Mario(Sprite):
     def update(self):
         super().update()
         if self.moveRight:
-            self.rect.x += 1
+            self.rect.x += 8
         if self.cameraMove:
-            self.settings.camera.x += 1
+            self.settings.camera.x += 8
+        self.rect.y -= self.settings.gravity
 
         self.blitMario()
 
