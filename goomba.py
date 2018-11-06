@@ -6,6 +6,7 @@ from spritesheet import SpriteSheet
 from pygame.sprite import Group
 from pygame.sprite import Sprite
 
+
 class Goomba(Sprite):
     def __init__(self, screen, settings, x, y):
         super(Goomba, self).__init__()

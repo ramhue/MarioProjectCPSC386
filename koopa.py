@@ -2,9 +2,12 @@
 
 import pygame
 from spritesheet import SpriteSheet
+from pygame.sprite import Sprite
 
-class Koopa():
+
+class Koopa(Sprite):
     def __init__(self, screen, settings, x, y):
+        super(Koopa, self).__init__()
         self.screen = screen
         self.settings = settings
         self.sprite = SpriteSheet('images/spritesheet.png')

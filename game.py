@@ -54,7 +54,8 @@ class Game():
         self.thegoomba.add(Goomba(self.level, self.gamesettings, 2808, 184))
 
         # Add koopa
-        self.thekoopa = Koopa(self.level, self.gamesettings, 1717, 178)
+        self.thekoopa = Group()
+        self.thekoopa.add(Koopa(self.level, self.gamesettings, 1717, 178))
 
         # Game stats
         self.stats = GameStats(self.screen, self.gamesettings)
@@ -77,7 +78,8 @@ class Game():
         self.level.blit(self.background, self.gamesettings.camera, self.gamesettings.camera)
         for goomba in self.thegoomba:
             goomba.blitGoomba()
-        self.thekoopa.blitKoopa()
+        for koopa in self.thekoopa:
+            koopa.blitKoopa()
         self.player.update()
 
         # DEBUG
