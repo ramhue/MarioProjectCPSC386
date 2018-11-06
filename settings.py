@@ -11,5 +11,6 @@ class Settings():
         self.scale = 3
         self.camera = self.screen.get_rect()
         self.camera.x = 0
+        self.gravity = -8
 
 

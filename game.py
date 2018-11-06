@@ -42,6 +42,7 @@ class Game():
         while True:
             # CHANGE TO MARIO
             gf.check_events(self.player, self.thegoomba, self.background)
+            self.checkCollision()
             # self.background.blitbackground()
             self.blit()
 
@@ -51,14 +52,30 @@ class Game():
         self.thegoomba.blitGoomba()
         self.player.update()
 
-        self.pipes.draw(self.level)
-        self.ground.draw(self.level)
-        self.steps.draw(self.level)
+        # DEBUG
+        # self.pipes.draw(self.level)
+        # self.ground.draw(self.level)
+        # self.steps.draw(self.level)
+        # /DEBUG
         self.screen.blit(self.level, (0, 0), self.gamesettings.camera)
 
         self.stats.blitstats()
 
         pygame.display.flip()
+
+    def checkCollision(self):
+        collided = pygame.sprite.spritecollide(self.player, self.pipes, False, False)
+        for pipe in collided:
+            self.player.rect.bottom = pipe.rect.top
+
+        collided = pygame.sprite.spritecollide(self.player, self.steps, False, False)
+        for step in collided:
+            self.player.rect.bottom = step.rect.top
+
+        collided = pygame.sprite.spritecollide(self.player, self.ground, False, False)
+        for ground in collided:
+            self.player.rect.bottom = ground.rect.top
+
 
     def createblocks(self):
         # Create Pipes

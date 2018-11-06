@@ -32,9 +32,10 @@ class Mario(Sprite):
     def update(self):
         super().update()
         if self.moveRight:
-            self.rect.x += 1
+            self.rect.x += 8
         if self.cameraMove:
-            self.settings.camera.x += 5
+            self.settings.camera.x += 8
+        self.rect.y -= self.settings.gravity
 
         self.blitMario()
 
