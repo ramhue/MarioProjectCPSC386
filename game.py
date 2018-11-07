@@ -70,6 +70,7 @@ class Game():
             # CHANGE TO MARIO
             gf.check_events(self.player, self.thegoomba, self.background)
             self.checkCollision()
+            self.checkGoombaCollision()
             # self.background.blitbackground()
             self.blit()
 
@@ -81,6 +82,8 @@ class Game():
         for koopa in self.thekoopa:
             koopa.blitKoopa()
         self.player.update()
+        self.thegoomba.update()
+        self.thekoopa.update()
 
         # DEBUG
         # self.pipes.draw(self.level)
@@ -106,6 +109,19 @@ class Game():
         for ground in collided:
             self.player.rect.bottom = ground.rect.top
 
+
+    def checkGoombaCollision(self):
+        collided = pygame.sprite.spritecollide(self.player, self.pipes, False, False)
+        for pipe in collided:
+            self.thegoomba.rect.bottom = pipe.rect.top
+
+        collided = pygame.sprite.spritecollide(self.player, self.steps, False, False)
+        for step in collided:
+            self.thegoomba.rect.bottom = step.rect.top
+
+        collided = pygame.sprite.spritecollide(self.player, self.ground, False, False)
+        for ground in collided:
+            self.thegoomba.rect.bottom = ground.rect.top
 
     def createblocks(self):
         # Create Pipes

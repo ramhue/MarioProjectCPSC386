@@ -26,11 +26,9 @@ def check_keydown_events(event, mario, goomba, background):
     elif event.key == pygame.K_RIGHT:
         mario.moving_right = True
         mario.moveRight = True
-        #if background.rect
-        #goomba.pos1 = (background.scale * 10)
-        #goomba.pos2 -= (background.scale * 10)
     elif event.key == pygame.K_LEFT:
         mario.moving_left = True
+        mario.moveLeft = True
     elif event.key == pygame.K_SPACE:
         pass
     elif event.key == pygame.K_QUIT:
@@ -44,6 +42,7 @@ def check_keyup_events(event, mario):
         mario.moveRight = False
     elif event.key == pygame.K_LEFT:
         mario.moving_left = False
+        mario.moveLeft = False
     elif event.key == pygame.K_UP:
         mario.moving_up = False
         mario.cameraMove = False

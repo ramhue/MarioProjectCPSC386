@@ -27,6 +27,12 @@ class Koopa(Sprite):
         self.rect = self.images[0].get_rect()
         self.rect.x, self.rect.y = x * self.settings.scale, y * self.settings.scale
 
+    def update(self):
+        super().update()
+        self.rect.x -= 1
+        #self.rect.y -= self.settings.gravity
+        self.blitKoopa()
+
     def blitKoopa(self):
         if pygame.time.get_ticks() > self.last + 500:
             if self.animIter == 1:
