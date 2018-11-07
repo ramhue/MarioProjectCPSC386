@@ -40,7 +40,5 @@ class Mario(Sprite):
             self.settings.camera.x += 8
         self.rect.y -= self.settings.gravity
 
-        self.blitMario()
-
     def blitMario(self):
         self.level.blit(self.image, self.rect)

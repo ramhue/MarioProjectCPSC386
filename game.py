@@ -3,12 +3,12 @@
 import pygame
 import game_functions as gf
 from settings import Settings
-from stage_background import Stage_Background
 from gameStats import GameStats
 from mario import Mario
 from goomba import Goomba
 from pygame.sprite import Group
 from blockrect import blockRect
+from floatBlock import FloatBlock
 
 class Game():
     def __init__(self):
@@ -36,29 +36,28 @@ class Game():
         self.pipes = Group()
         self.ground = Group()
         self.steps = Group()
+        self.floatBricks = Group()
         self.createblocks()
         
     def play(self):
         while True:
             # CHANGE TO MARIO
             gf.check_events(self.player, self.thegoomba, self.background)
-            self.checkCollision()
-            # self.background.blitbackground()
+            self.update()
             self.blit()
 
     # Blit everything to self.level then blit self.level
     def blit(self):
         self.level.blit(self.background, self.gamesettings.camera, self.gamesettings.camera)
         self.thegoomba.blitGoomba()
-        self.player.update()
-
         # DEBUG
         # self.pipes.draw(self.level)
         # self.ground.draw(self.level)
         # self.steps.draw(self.level)
         # /DEBUG
+        self.floatBricks.draw(self.level)
+        self.player.blitMario()
         self.screen.blit(self.level, (0, 0), self.gamesettings.camera)
-
         self.stats.blitstats()
 
         pygame.display.flip()
@@ -75,6 +74,10 @@ class Game():
         collided = pygame.sprite.spritecollide(self.player, self.ground, False, False)
         for ground in collided:
             self.player.rect.bottom = ground.rect.top
+
+        collided = pygame.sprite.spritecollide(self.player, self.floatBricks, False, False)
+        for brick in collided:
+            brick.movingUp = True
 
 
     def createblocks(self):
@@ -123,6 +126,15 @@ class Game():
         self.steps.add(blockRect(2895+96, 182-96, 16, 112, self.gamesettings.scale))
         self.steps.add(blockRect(2895+112, 182-112, 16, 128, self.gamesettings.scale))
         self.steps.add(blockRect(2895+128, 182-112, 16, 128, self.gamesettings.scale))
+
+        # Create floating blocks
+        self.floatBricks.add(FloatBlock(150, 180, 16, 16, 272, 112, self.gamesettings.scale))
+
+    def update(self):
+        self.checkCollision()
+        self.player.update()
+        for brick in self.floatBricks:
+            brick.update()
 
 
 game = Game()
