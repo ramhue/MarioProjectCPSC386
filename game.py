@@ -60,6 +60,7 @@ class Game():
         # Game stats
         self.stats = GameStats(self.screen, self.gamesettings)
 
+        # Stage objects
         self.pipes = Group()
         self.ground = Group()
         self.steps = Group()
@@ -70,7 +71,7 @@ class Game():
             # CHANGE TO MARIO
             gf.check_events(self.player, self.thegoomba, self.background)
             self.checkCollision()
-            self.checkGoombaCollision()
+            #self.checkGoombaCollision()
             # self.background.blitbackground()
             self.blit()
 
@@ -111,17 +112,23 @@ class Game():
 
 
     def checkGoombaCollision(self):
-        collided = pygame.sprite.spritecollide(self.player, self.pipes, False, False)
+        collided = pygame.sprite.groupcollide(self.thegoomba, self.pipes, False, False)
         for pipe in collided:
-            self.thegoomba.rect.bottom = pipe.rect.top
+            for goomba in self.thegoomba:
+                goomba.rect.bottom = pipe.rect.top
+            #self.thegoomba.rect.bottom = pipe.rect.top
 
-        collided = pygame.sprite.spritecollide(self.player, self.steps, False, False)
+        collided = pygame.sprite.groupcollide(self.thegoomba, self.steps, False, False)
         for step in collided:
-            self.thegoomba.rect.bottom = step.rect.top
+            for goomba in self.thegoomba:
+                goomba.rect.bottom = step.rect.top
+            #self.thegoomba.rect.bottom = step.rect.top
 
-        collided = pygame.sprite.spritecollide(self.player, self.ground, False, False)
+        collided = pygame.sprite.groupcollide(self.thegoomba, self.ground, False, False)
         for ground in collided:
-            self.thegoomba.rect.bottom = ground.rect.top
+            for goomba in self.thegoomba:
+                goomba.rect.bottom = ground.rect.top
+            #self.thegoomba.rect.bottom = ground.rect.top
 
     def createblocks(self):
         # Create Pipes
