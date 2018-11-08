@@ -40,7 +40,7 @@ class Goomba(Sprite):
     def update(self):
         super().update()
         self.rect.x -= 1
-        #self.rect.y -= self.settings.gravity
+        self.rect.y -= self.settings.gravity
         self.blitGoomba()
 
     def blitGoomba(self):
