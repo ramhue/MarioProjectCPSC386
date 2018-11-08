@@ -30,8 +30,8 @@ class Koopa(Sprite):
     def update(self):
         super().update()
         self.rect.x -= 1
-        #self.rect.y -= self.settings.gravity
-        self.blitKoopa()
+        self.rect.y -= self.settings.gravity
+        #self.blitKoopa()
 
     def blitKoopa(self):
         if pygame.time.get_ticks() > self.last + 500:

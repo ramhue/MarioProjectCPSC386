@@ -28,20 +28,21 @@ class Goomba(Sprite):
         self.image = self.images[0]
         self.rect = self.images[0].get_rect()
         self.rect.x, self.rect.y = x * self.settings.scale, y * self.settings.scale
+        self.velocityY = 0
 
-        self.moveLeft = False
+        self.moveLeft = True
         self.moveRight = False
         self.moveUp = False
         self.moveDown = False
 
-        self.delta = 5
-        self.u = 1
-
     def update(self):
         super().update()
-        self.rect.x -= 1
+        if self.moveLeft:
+            self.rect.x -= 1
+        else:
+            self.rect.x += 1
         self.rect.y -= self.settings.gravity
-        self.blitGoomba()
+
 
     def blitGoomba(self):
         if pygame.time.get_ticks() > self.last + 500:

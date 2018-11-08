@@ -36,7 +36,7 @@ class Game():
 
         # Add all goombas
         self.thegoomba = Group()
-        self.thegoomba.add(Goomba(self.level, self.gamesettings, 352, 184))
+        self.thegoomba.add(Goomba(self.level, self.gamesettings, 352, 220))
         self.thegoomba.add(Goomba(self.level, self.gamesettings, 640, 184))
         self.thegoomba.add(Goomba(self.level, self.gamesettings, 815, 184))
         self.thegoomba.add(Goomba(self.level, self.gamesettings, 840, 184))
@@ -72,6 +72,7 @@ class Game():
             gf.check_events(self.player, self.thegoomba, self.background)
             self.checkCollision()
             self.checkGoombaCollision()
+            self.checkKoopaCollision()
             # self.background.blitbackground()
             self.blit()
 
@@ -114,18 +115,36 @@ class Game():
     def checkGoombaCollision(self):
         collided = pygame.sprite.groupcollide(self.thegoomba, self.pipes, False, False)
         for goomba, pipe in collided.items():
-            goomba.rect.bottom = pipe[0].rect.top
-            #self.thegoomba.rect.bottom = pipe.rect.top
+            #goomba.rect.bottom = pipe[0].rect.top
+            if pipe[0].rect.x < goomba.rect.x:
+                goomba.moveLeft = False
+            if pipe[0].rect.x > goomba.rect.x:
+                goomba.moveLeft = True
 
         collided = pygame.sprite.groupcollide(self.thegoomba, self.steps, False, False)
         for goomba, step in collided.items():
             goomba.rect.bottom = step[0].rect.top
-            #self.thegoomba.rect.bottom = step.rect.top
 
         collided = pygame.sprite.groupcollide(self.thegoomba, self.ground, False, False)
         for goomba, ground in collided.items():
             goomba.rect.bottom = ground[0].rect.top
-            #self.thegoomba.rect.bottom = ground.rect.top
+
+    def checkKoopaCollision(self):
+        collided = pygame.sprite.groupcollide(self.thekoopa, self.pipes, False, False)
+        for koopa, pipe in collided.items():
+                # goomba.rect.bottom = pipe[0].rect.top
+            if pipe[0].rect.x < koopa.rect.x:
+                  koopa.moveLeft = False
+            if pipe[0].rect.x > koopa.rect.x:
+                  koopa.moveLeft = True
+
+        collided = pygame.sprite.groupcollide(self.thekoopa, self.steps, False, False)
+        for koopa, step in collided.items():
+            koopa.rect.bottom = step[0].rect.top
+
+        collided = pygame.sprite.groupcollide(self.thekoopa, self.ground, False, False)
+        for koopa, ground in collided.items():
+            koopa.rect.bottom = ground[0].rect.top
 
     def createblocks(self):
         # Create Pipes
