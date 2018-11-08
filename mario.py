@@ -28,6 +28,38 @@ class Mario(Sprite):
         self.moveRight = False
         self.moveUp = False
         self.moveDown = False
+        self.jumping = False
+        self.Falling = False
+
+        #STATE Flags
+        self.face_right = True
+        self.face_left = False
+        self.dead = False
+        self.Star = False
+        self.big = False
+        self.fire_mario = False
+        self.ducking = False
+
+        self.state_list = ["Stand", "Walk", "Jumping" "Run",
+                           "Duck", "FaceLeft", "FaceRight",
+                           "Falling"]
+
+        self.current_state = "Stand"
+
+        #Forces
+        self.vel_x = 0
+        self.vel_y = 0
+        self.vel_x_Max = 5
+        self.vel_y_Max = -10
+        self.walk_accel_x = .2
+        self.gravity = 1
+        self.gravity_jump = .5
+        self.vel_jump = 10
+        self.run_accel_x = 20
+        self.RUN_MAX = 80
+        self.MAX_WALK = 3
+        self.run_walk_vel = -13
+
 
         # TEMPORARY: Flag to check if camera is moving
         self.cameraMove = False
@@ -35,10 +67,46 @@ class Mario(Sprite):
     def update(self):
         super().update()
         if self.moveRight:
-            self.rect.x += 8
+            if self.vel_x < self.MAX_WALK:
+                self.vel_x += self.walk_accel_x
+
         if self.cameraMove:
-            self.settings.camera.x += 8
-        self.rect.y -= self.settings.gravity
+            self.settings.camera.x += round(self.vel_x)
+
+        if self.moveLeft:
+            if self.vel_x > (self.MAX_WALK * -1):
+                self.vel_x -= self.walk_accel_x
+                if self.vel_x > -.5:
+                    self.vel_x = -.5
+            elif self.vel_x < (self.MAX_WALK * -1):
+                self.vel_x += self.walk_accel_x
+
+        if self.jumping == True:
+            print('HELLO')
+            print(str(self.vel_y ))
+            if self.vel_y < self.vel_y_Max:
+                self.vel_y += self.gravity_jump
+                print(str(self.vel_y))
+                self.rect.y -= round(self.vel_y)
+            if self.vel_y == self.vel_y_Max:
+                self.Falling = True
+        elif self.Falling == True:
+                self.vel_y -= self.gravity
+                self.rect.y += round(self.vel_y)
+                if self.vel_y == 0:
+                    self.Falling = False
+
+        self.rect.x += round(self.vel_x)
+
+       # if self.Falling:
+        #if self.current_state = "Stand"
+
 
     def blitMario(self):
         self.level.blit(self.image, self.rect)
+    def cameraCheck(self):
+        if self.rect.x == self.settings.camera.x + (self.settings.screen_width/2):
+            print(self.settings.camera.x + (self.settings.screen_width/2))
+            self.cameraMove = True
+
+

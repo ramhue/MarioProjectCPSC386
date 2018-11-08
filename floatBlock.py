@@ -8,7 +8,7 @@ class FloatBlock(Sprite):
     def __init__(self, x, y, width, height, sheetx, sheety, scale):
         super(FloatBlock, self).__init__()
         self.scale = scale
-        self.spritesheet = SpriteSheet('images/blocks.png')
+        self.spritesheet = SpriteSheet('images/ground_blocks.png')
         self.image = self.spritesheet.get_image(sheetx, sheety, width, height)
         self.image.set_colorkey((255, 0, 0))
         self.image = pygame.transform.scale(self.image, (self.image.get_width()*self.scale,
