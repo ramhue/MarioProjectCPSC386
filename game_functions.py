@@ -16,13 +16,13 @@ def check_events(mario, goomba, background):
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, mario)
 
+
 def check_keydown_events(event, mario, goomba, background):
     """Respond to keypresses."""
     if event.key == pygame.K_UP:
         mario.moving_up = True
         mario.cameraMove = True
     elif event.key == pygame.K_SPACE:
-        print('HELLO7')
         mario.jumping = True
     elif event.key == pygame.K_DOWN:
         mario.moving_down = True
@@ -37,7 +37,6 @@ def check_keydown_events(event, mario, goomba, background):
     elif event.key == pygame.K_QUIT:
         sys.exit()
 
-
 def check_keyup_events(event, mario):
     """Respond to key releases."""
     if event.key == pygame.K_RIGHT:
@@ -50,8 +49,10 @@ def check_keyup_events(event, mario):
         mario.cameraMove = False
     elif event.key == pygame.K_DOWN:
         mario.moving_down = False
-    mario.vel_x = 0
+    elif event.key == pygame.K_SPACE:
+        pass
 
+    mario.vel_x = 0
 # Check direction mario is going to compare and see if he can't go a direction anymore if he hit a block
 def check_direction(mario, block):
     left = False
