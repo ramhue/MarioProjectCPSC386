@@ -10,4 +10,5 @@ class blockRect(Sprite):
         self.rect.x = x*scale
         self.rect.y = y*scale
         # Temporary to visualize blocks
-        # self.image.fill((255, 0, 0))
+        self.image.fill((255, 0, 0))
+

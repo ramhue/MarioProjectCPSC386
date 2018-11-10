@@ -86,6 +86,8 @@ class Game():
         self.player.blitMario()
         self.thegoomba.update()
         self.thekoopa.update()
+        for block in self.ground:
+            self.level.blit(block.image, block.rect)
 
         # DEBUG
         # self.pipes.draw(self.level)
