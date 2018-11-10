@@ -8,7 +8,7 @@ from pygame.sprite import Sprite
 
 
 class Goomba(Sprite):
-    def __init__(self, screen, settings, x, y):
+    def __init__(self, screen, settings, x, y, death=False):
         super(Goomba, self).__init__()
         self.screen = screen
         self.settings = settings
@@ -34,6 +34,8 @@ class Goomba(Sprite):
         self.moveUp = False
         self.moveDown = False
 
+        self.death = False
+
     def update(self):
         super().update()
         if self.moveLeft:
@@ -42,7 +44,7 @@ class Goomba(Sprite):
             self.rect.x += 1
         self.rect.y -= self.settings.gravity
 
-    def blitGoomba(self, death=False):
+    def blitGoomba(self):
         if pygame.time.get_ticks() > self.last + 500:
             if self.animIter == 1:
                 self.animIter = 0
@@ -50,7 +52,7 @@ class Goomba(Sprite):
                 self.animIter += 1
             self.image = self.images[self.animIter]
             self.last = pygame.time.get_ticks()
-        if death:
+        if self.death:
             self.image = self.images[2]
 
         self.screen.blit(self.image, self.rect)

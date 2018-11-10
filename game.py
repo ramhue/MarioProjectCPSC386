@@ -117,9 +117,7 @@ class Game():
                 self.player.blitMario(True)
                 self.player.rect.y -= self.gamesettings.gravity
             if self.player.rect.bottom >= goomba.rect.top:
-                for goomba in self.thegoomba:
-                    goomba.blitGoomba(True)
-                    goomba.rect.y -= self.gamesettings.gravity
+                goomba.death = True
 
         collided = pygame.sprite.spritecollide(self.player, self.thekoopa, False, False)
         for koopa in collided:
@@ -127,10 +125,7 @@ class Game():
                 self.player.blitMario(True)
                 self.player.rect.y -= self.gamesettings.gravity
             if self.player.rect.bottom >= koopa.rect.top:
-                for koopa in self.thekoopa:
-                    koopa.blitKoopa(True)
-                    koopa.rect.y -= self.gamesettings.gravity
-
+                koopa.death = True
 
     def checkGoombaCollision(self):
         collided = pygame.sprite.groupcollide(self.thegoomba, self.pipes, False, False)

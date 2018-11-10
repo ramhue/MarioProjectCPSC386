@@ -6,7 +6,7 @@ from pygame.sprite import Sprite
 
 
 class Koopa(Sprite):
-    def __init__(self, screen, settings, x, y):
+    def __init__(self, screen, settings, x, y, death=False):
         super(Koopa, self).__init__()
         self.screen = screen
         self.settings = settings
@@ -27,13 +27,15 @@ class Koopa(Sprite):
         self.rect = self.images[0].get_rect()
         self.rect.x, self.rect.y = x * self.settings.scale, y * self.settings.scale
 
+        self.death = False
+
     def update(self):
         super().update()
         self.rect.x -= 1
         self.rect.y -= self.settings.gravity
         #self.blitKoopa()
 
-    def blitKoopa(self, death=False):
+    def blitKoopa(self):
         if pygame.time.get_ticks() > self.last + 500:
             if self.animIter == 1:
                 self.animIter = 0
@@ -41,7 +43,7 @@ class Koopa(Sprite):
                 self.animIter += 1
             self.image = self.images[self.animIter]
             self.last = pygame.time.get_ticks()
-        if death:
+        if self.death:
             self.image = self.images[2]
 
         self.screen.blit(self.image, self.rect)
