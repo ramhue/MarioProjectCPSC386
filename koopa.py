@@ -19,8 +19,8 @@ class Koopa(Sprite):
         self.last = pygame.time.get_ticks()
         self.images.append(self.sprite.get_image(144, 0, 30, 26))
         self.images.append(self.sprite.get_image(174, 0, 30, 26))
-        self.images.append(self.sprite.get_image(204, 0, 30, 26))
-        self.images.append(self.sprite.get_image(234, 0, 30, 26))
+        self.images.append(self.sprite.get_image(321, 0, 30, 26))
+        self.images.append(self.sprite.get_image(352, 0, 30, 26))
         for i in range(4):
             self.images[i] = pygame.transform.scale(self.images[i], (self.width, self.height))
         self.image = self.images[0]
@@ -33,7 +33,7 @@ class Koopa(Sprite):
         self.rect.y -= self.settings.gravity
         #self.blitKoopa()
 
-    def blitKoopa(self):
+    def blitKoopa(self, death=False):
         if pygame.time.get_ticks() > self.last + 500:
             if self.animIter == 1:
                 self.animIter = 0
@@ -41,5 +41,7 @@ class Koopa(Sprite):
                 self.animIter += 1
             self.image = self.images[self.animIter]
             self.last = pygame.time.get_ticks()
+        if death:
+            self.image = self.images[2]
 
         self.screen.blit(self.image, self.rect)

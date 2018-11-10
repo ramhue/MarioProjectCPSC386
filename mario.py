@@ -21,6 +21,10 @@ class Mario(Sprite):
         self.image = self.smallimages[0]
         self.rect = self.image.get_rect()
 
+        self.height = 50
+        self.animIter = 0
+        self.last = pygame.time.get_ticks()
+
         # Set starting Y:
         self.rect.y = 550
 
@@ -36,11 +40,32 @@ class Mario(Sprite):
         super().update()
         if self.moveRight:
             self.rect.x += 8
+        if self.moveLeft:
+            self.rect.x -= 8
         if self.cameraMove:
             self.settings.camera.x += 8
         self.rect.y -= self.settings.gravity
 
-        self.blitMario()
+        self.blitMario(False)
 
-    def blitMario(self):
+    def blitMario(self, collided=False):
+        if self.moveRight:
+            if pygame.time.get_ticks() > self.last + 200:
+                if self.animIter == 3:
+                    self.animIter = 0
+                else:
+                    self.animIter += 1
+                self.image = self.smallimages[self.animIter]
+                self.last = pygame.time.get_ticks()
+        if self.moveLeft:
+            if pygame.time.get_ticks() > self.last + 200:
+                if self.animIter == 3:
+                    self.animIter = 0
+                else:
+                    self.animIter += 1
+                self.image = self.smallimages[self.animIter]
+                self.image = pygame.transform.flip(self.image, True, False)
+                self.last = pygame.time.get_ticks()
+        if collided:
+                self.image = self.smallimages[6]
         self.level.blit(self.image, self.rect)

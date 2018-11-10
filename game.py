@@ -111,6 +111,26 @@ class Game():
         for ground in collided:
             self.player.rect.bottom = ground.rect.top
 
+        collided = pygame.sprite.spritecollide(self.player, self.thegoomba, False, False)
+        for goomba in collided:
+            if self.player.rect.x >= goomba.rect.x:
+                self.player.blitMario(True)
+                self.player.rect.y -= self.gamesettings.gravity
+            if self.player.rect.bottom >= goomba.rect.top:
+                for goomba in self.thegoomba:
+                    goomba.blitGoomba(True)
+                    goomba.rect.y -= self.gamesettings.gravity
+
+        collided = pygame.sprite.spritecollide(self.player, self.thekoopa, False, False)
+        for koopa in collided:
+            if self.player.rect.x >= koopa.rect.x:
+                self.player.blitMario(True)
+                self.player.rect.y -= self.gamesettings.gravity
+            if self.player.rect.bottom >= koopa.rect.top:
+                for koopa in self.thekoopa:
+                    koopa.blitKoopa(True)
+                    koopa.rect.y -= self.gamesettings.gravity
+
 
     def checkGoombaCollision(self):
         collided = pygame.sprite.groupcollide(self.thegoomba, self.pipes, False, False)
