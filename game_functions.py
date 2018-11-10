@@ -12,28 +12,27 @@ def check_events(mario, goomba, background):
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event, mario, goomba, background)
+            check_keydown_events(event, mario)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, mario)
 
-def check_keydown_events(event, mario, goomba, background):
+
+def check_keydown_events(event, mario):
     """Respond to keypresses."""
     if event.key == pygame.K_UP:
         mario.moving_up = True
         mario.cameraMove = True
+    elif event.key == pygame.K_SPACE:
+        mario.jumping = True
     elif event.key == pygame.K_DOWN:
         mario.moving_down = True
     elif event.key == pygame.K_RIGHT:
-        mario.moving_right = True
         mario.moveRight = True
     elif event.key == pygame.K_LEFT:
-        mario.moving_left = True
         mario.moveLeft = True
-    elif event.key == pygame.K_SPACE:
-        pass
+        mario.current_state = mario.state_list[1]
     elif event.key == pygame.K_QUIT:
         sys.exit()
-
 
 def check_keyup_events(event, mario):
     """Respond to key releases."""
@@ -41,45 +40,15 @@ def check_keyup_events(event, mario):
         mario.moving_right = False
         mario.moveRight = False
     elif event.key == pygame.K_LEFT:
-        mario.moving_left = False
         mario.moveLeft = False
     elif event.key == pygame.K_UP:
         mario.moving_up = False
         mario.cameraMove = False
     elif event.key == pygame.K_DOWN:
         mario.moving_down = False
+    elif event.key == pygame.K_SPACE:
+        pass
 
-
-# Check direction mario is going to compare and see if he can't go a direction anymore if he hit a block
-def check_direction(mario, block):
-    left = False
-    right = False
-    up = False
-    down = False
-    if mario.rect.centerx <= block.rect.centerx:
-        right = True
-    else:
-        left = True
-    if mario.rect.y + mario.rect.height / 2 <= block.rect.y + block.rect.height / 2:
-        up = True
-    else:
-        down = True
-
-    if left:
-        mario.x += 1
-    elif right:
-        mario.x -= 1
-    if up:
-        mario.y -= 1
-    elif down:
-        mario.y += 1
-
-
-# Mario collision handling
-def check_collision(mario, blocks):
-    for block in blocks:
-        if pygame.sprite.collide_rect(mario, block):
-            print("collided")
-            check_direction(mario, block)
+    mario.vel_x = 0
 
 
