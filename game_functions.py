@@ -53,36 +53,6 @@ def check_keyup_events(event, mario):
         pass
 
     mario.vel_x = 0
-# Check direction mario is going to compare and see if he can't go a direction anymore if he hit a block
-def check_direction(mario, block):
-    left = False
-    right = False
-    up = False
-    down = False
-    if mario.rect.centerx <= block.rect.centerx:
-        right = True
-    else:
-        left = True
-    if mario.rect.y + mario.rect.height / 2 <= block.rect.y + block.rect.height / 2:
-        up = True
-    else:
-        down = True
 
-    if left:
-        mario.x += 1
-    elif right:
-        mario.x -= 1
-    if up:
-        mario.y -= 1
-    elif down:
-        mario.y += 1
-
-
-# Mario collision handling
-def check_collision(mario, blocks):
-    for block in blocks:
-        if pygame.sprite.collide_rect(mario, block):
-            print("collided")
-            check_direction(mario, block)
 
 
