@@ -108,6 +108,9 @@ class Mario(Sprite):
         self.rect.x += round(self.vel_x)
         self.rect.y -= round(self.vel_y)
 
+        if self.settings.camera.x < self.rect.x - self.settings.screen_width/2:
+            self.settings.camera.x += self.vel_x
+
     def reset(self):
         self.rect.x, self.rect.y = 0, 550
         self.image = self.smallimages[0]
