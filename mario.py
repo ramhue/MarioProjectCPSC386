@@ -55,7 +55,7 @@ class Mario(Sprite):
         self.vel_x = 0
         self.vel_y = self.settings.gravity
         self.vel_x_Max = 50
-        self.vel_y_Max = 10
+        self.vel_y_Max = 16
 
         self.walk_accel_x = .5
         self.gravity = 1
@@ -86,13 +86,13 @@ class Mario(Sprite):
             elif self.vel_x < (self.MAX_WALK * -1):
                 self.vel_x += self.walk_accel_x
 
-        if self.jumping == True:
+        if self.jumping:
             self.image = self.smallimages[5]
             if self.face_left:
                 self.image = pygame.transform.flip(self.image, True, False)
-            if self.vel_y < 0:
+            if self.vel_y < self.vel_y_Max:
                 self.vel_y += 1
-            elif self.vel_y == 0:
+            elif self.vel_y == self.vel_y_Max:
                 self.vel_y = -1
                 self.jumping = False
                 self.Falling = True
@@ -104,7 +104,7 @@ class Mario(Sprite):
                 self.Falling = False
                 self.image = self.smallimages[0]
 
-        print(str(self.vel_y))
+        # print(str(self.vel_y))
         self.rect.x += round(self.vel_x)
         self.rect.y -= round(self.vel_y)
 
