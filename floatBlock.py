@@ -21,21 +21,13 @@ class FloatBlock(Sprite):
         self.maxHeight = self.rect.y - (8*self.scale)
         self.last = pygame.time.get_ticks()
 
-        self.movingUp = False
-        self.movingDown = False
-
     def update(self):
-        # If block is in motion
-        if self.movingUp:
-            if self.rect.y <= self.maxHeight:
-                self.movingUp = False
-                self.movingDown = True
-            else:
-                self.rect.y -= 2
-        if self.movingDown:
-            if self.rect.y >= self.origY:
-                self.movingDown = False
-                self.rect.y = self.origY
-            else:
-                self.rect.y += 2
+        # Return to original position
+        if self.rect.y < self.origY:
+            self.rect.y += 2*self.scale
+        elif self.rect.y > self.origY:
+            self.rect.y -= 2*self.scale
+
+
+
 

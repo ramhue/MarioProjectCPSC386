@@ -123,18 +123,16 @@ class Game():
         collided = pygame.sprite.spritecollide(self.player, self.pipes, False, False)
         for pipe in collided:
             self.player.rect.bottom = pipe.rect.top
-
         collided = pygame.sprite.spritecollide(self.player, self.steps, False, False)
         for step in collided:
             self.player.rect.bottom = step.rect.top
-
         collided = pygame.sprite.spritecollide(self.player, self.ground, False, False)
         for ground in collided:
             self.player.rect.bottom = ground.rect.top
-
         collided = pygame.sprite.spritecollide(self.player, self.coinBlocks, False, False)
         for brick in collided:
             brick.rect.bottom = self.player.rect.top
+
         collided = pygame.sprite.spritecollide(self.player, self.brickBlocks, False, False)
         for brick in collided:
             brick.rect.bottom = self.player.rect.top
@@ -293,9 +291,6 @@ class Game():
         self.brickBlocks.add(FloatBlock(2687, 136, 16, 16, 272, 112, self.gamesettings.scale))
         self.brickBlocks.add(FloatBlock(2687+16, 136, 16, 16, 272, 112, self.gamesettings.scale))
         self.brickBlocks.add(FloatBlock(2687+48, 136, 16, 16, 272, 112, self.gamesettings.scale))
-
-
-
 
 
 

@@ -78,7 +78,7 @@ class Mario(Sprite):
             if self.vel_x < self.MAX_WALK:
                 self.vel_x += self.walk_accel_x
 
-        if self.moveLeft:
+        if self.moveLeft and self.rect.x:
             if self.vel_x > (self.MAX_WALK * -1):
                 self.vel_x -= self.walk_accel_x
                 if self.vel_x > -1:
@@ -108,7 +108,7 @@ class Mario(Sprite):
         self.rect.x += round(self.vel_x)
         self.rect.y -= round(self.vel_y)
 
-        if self.settings.camera.x < self.rect.x - self.settings.screen_width/2:
+        if self.settings.camera.x < self.rect.x - self.settings.screen_width/2 and self.vel_x >= 1:
             self.settings.camera.x += self.vel_x
 
     def reset(self):
