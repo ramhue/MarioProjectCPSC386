@@ -134,10 +134,10 @@ class Game():
 
         collided = pygame.sprite.spritecollide(self.player, self.coinBlocks, False, False)
         for brick in collided:
-            brick.movingUp = True
+            brick.rect.bottom = self.player.rect.top
         collided = pygame.sprite.spritecollide(self.player, self.brickBlocks, False, False)
         for brick in collided:
-            brick.movingUp = True
+            brick.rect.bottom = self.player.rect.top
 
         # Check mario collisions with enemies
         # if collide by side mario dies or loses 1 level
