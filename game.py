@@ -119,7 +119,10 @@ class Game():
             if self.player.rect.x >= goomba.rect.x:
                 self.player.death = True
                 self.player.rect.y -= self.gamesettings.gravity * 2
-            if self.player.rect.bottom >= goomba.rect.top:
+
+        collided = pygame.sprite.spritecollide(self.player, self.thegoomba, True, False)
+        for goomba in collided:
+            if self.player.rect.bottom == goomba.rect.top:
                 goomba.death = True
 
         collided = pygame.sprite.spritecollide(self.player, self.thekoopa, False, False)
