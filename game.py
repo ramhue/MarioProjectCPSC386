@@ -133,7 +133,6 @@ class Game():
     def checkGoombaCollision(self):
         collided = pygame.sprite.groupcollide(self.thegoomba, self.pipes, False, False)
         for goomba, pipe in collided.items():
-            #goomba.rect.bottom = pipe[0].rect.top
             if pipe[0].rect.x < goomba.rect.x:
                 goomba.moveLeft = False
             if pipe[0].rect.x > goomba.rect.x:
@@ -150,7 +149,6 @@ class Game():
     def checkKoopaCollision(self):
         collided = pygame.sprite.groupcollide(self.thekoopa, self.pipes, False, False)
         for koopa, pipe in collided.items():
-                # goomba.rect.bottom = pipe[0].rect.top
             if pipe[0].rect.x < koopa.rect.x:
                   koopa.moveLeft = False
             if pipe[0].rect.x > koopa.rect.x:

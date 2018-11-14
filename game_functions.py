@@ -2,8 +2,6 @@
 
 import pygame
 import sys
-from stage_background import Stage_Background
-from pygame.sprite import Group
 
 
 def check_events(mario, goomba, background):
@@ -33,6 +31,7 @@ def check_keydown_events(event, mario):
         mario.current_state = mario.state_list[1]
     elif event.key == pygame.K_QUIT:
         sys.exit()
+
 
 def check_keyup_events(event, mario):
     """Respond to key releases."""

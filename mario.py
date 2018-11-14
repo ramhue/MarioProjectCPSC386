@@ -142,7 +142,7 @@ class Mario(Sprite):
         if self.death:
             if pygame.time.get_ticks() > self.last + 1000:
                 self.image = self.smallimages[6]
-                self.reset()
+                #self.reset()
             self.death = False
 
         self.level.blit(self.image, self.rect)
