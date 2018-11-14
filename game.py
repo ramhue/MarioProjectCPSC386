@@ -4,6 +4,7 @@ import pygame
 import game_functions as gf
 from settings import Settings
 from stage_background import Stage_Background
+from start_screen import Start_Screen
 from gameStats import GameStats
 from mario import Mario
 from goomba import Goomba
@@ -20,6 +21,9 @@ class Game():
         pygame.display.set_caption("Super Mario")
 
         self.gamesettings = Settings(self.screen)
+
+        # Start Screen
+        self.startscreen = Start_Screen(self.screen, self.gamesettings)
 
         # Background Image for level
         self.background = pygame.image.load('images/marioW1.png')
@@ -65,19 +69,33 @@ class Game():
         self.ground = Group()
         self.steps = Group()
         self.createblocks()
-        
+
+    def intro(self):
+        self.startscreen.blit()
+        pygame.display.flip()
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    return
+
     def play(self):
+        self.intro()
         while True:
             # CHANGE TO MARIO
             gf.check_events(self.player, self.thegoomba, self.background)
             self.checkCollision()
             self.checkGoombaCollision()
             self.checkKoopaCollision()
-            # self.background.blitbackground()
+            #self.background.blitbackground()
             self.blit()
 
     # Blit everything to self.level then blit self.level
     def blit(self):
+        self.startscreen.blit()
         self.level.blit(self.background, self.gamesettings.camera, self.gamesettings.camera)
         for goomba in self.thegoomba:
             goomba.blitGoomba()
@@ -93,6 +111,7 @@ class Game():
         # self.ground.draw(self.level)
         # self.steps.draw(self.level)
         # /DEBUG
+        self.startscreen.blit()
         self.screen.blit(self.level, (0, 0), self.gamesettings.camera)
         self.stats.blitstats()
         pygame.display.flip()
