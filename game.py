@@ -98,7 +98,6 @@ class Game():
     def blit(self):
         self.startscreen.blit()
         self.level.blit(self.background, self.gamesettings.camera, self.gamesettings.camera)
-        self.thegoomba.blitGoomba()
         for goomba in self.thegoomba:
             goomba.blitGoomba()
         for koopa in self.thekoopa:
@@ -114,7 +113,6 @@ class Game():
         # /DEBUG
         self.coinBlocks.draw(self.level)
         self.brickBlocks.draw(self.level)
-        self.player.blitMario()
         self.startscreen.blit()
         self.screen.blit(self.level, (0, 0), self.gamesettings.camera)
         self.stats.blitstats()
