@@ -36,7 +36,8 @@ class Game():
         self.pipes = Group()
         self.ground = Group()
         self.steps = Group()
-        self.floatBricks = Group()
+        self.coinBlocks = Group()
+        self.brickBlocks = Group()
         self.createblocks()
         
     def play(self):
@@ -55,7 +56,8 @@ class Game():
         # self.ground.draw(self.level)
         # self.steps.draw(self.level)
         # /DEBUG
-        self.floatBricks.draw(self.level)
+        self.coinBlocks.draw(self.level)
+        self.brickBlocks.draw(self.level)
         self.player.blitMario()
         self.screen.blit(self.level, (0, 0), self.gamesettings.camera)
         self.stats.blitstats()
@@ -75,7 +77,10 @@ class Game():
         for ground in collided:
             self.player.rect.bottom = ground.rect.top
 
-        collided = pygame.sprite.spritecollide(self.player, self.floatBricks, False, False)
+        collided = pygame.sprite.spritecollide(self.player, self.coinBlocks, False, False)
+        for brick in collided:
+            brick.movingUp = True
+        collided = pygame.sprite.spritecollide(self.player, self.brickBlocks, False, False)
         for brick in collided:
             brick.movingUp = True
 
@@ -127,13 +132,102 @@ class Game():
         self.steps.add(blockRect(2895+112, 182-112, 16, 128, self.gamesettings.scale))
         self.steps.add(blockRect(2895+128, 182-112, 16, 128, self.gamesettings.scale))
 
-        # Create floating blocks
-        self.floatBricks.add(FloatBlock(150, 180, 16, 16, 272, 112, self.gamesettings.scale))
+        # Create floating coin blocks
+        self.coinBlocks.add(FloatBlock(255, 136, 16, 16, 80, 112, self.gamesettings.scale))
+        self.coinBlocks.add(FloatBlock(333, 136, 16, 16, 80, 112, self.gamesettings.scale))
+        self.coinBlocks.add(FloatBlock(333+32, 136, 16, 16, 80, 112, self.gamesettings.scale))
+        self.coinBlocks.add(FloatBlock(351, 72, 16, 16, 80, 112, self.gamesettings.scale))
+        self.coinBlocks.add(FloatBlock(1247, 136, 16, 16, 80, 112, self.gamesettings.scale))
+        self.coinBlocks.add(FloatBlock(1503, 72, 16, 16, 80, 112, self.gamesettings.scale))
+        self.coinBlocks.add(FloatBlock(1695, 136, 16, 16, 80, 112, self.gamesettings.scale))
+        self.coinBlocks.add(FloatBlock(1743, 136, 16, 16, 80, 112, self.gamesettings.scale))
+        self.coinBlocks.add(FloatBlock(1743, 72, 16, 16, 80, 112, self.gamesettings.scale))
+        self.coinBlocks.add(FloatBlock(1791, 136, 16, 16, 80, 112, self.gamesettings.scale))
+        self.coinBlocks.add(FloatBlock(2063, 72, 16, 16, 80, 112, self.gamesettings.scale))
+        self.coinBlocks.add(FloatBlock(2063+16, 72, 16, 16, 80, 112, self.gamesettings.scale))
+        self.coinBlocks.add(FloatBlock(2719, 136, 16, 16, 80, 112, self.gamesettings.scale))
+
+        # Create floating brick blocks
+        self.brickBlocks.add(FloatBlock(317, 136, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(317+32, 136, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(317+64, 136, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(1231, 136, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(1231+32, 136, 16, 16, 272, 112, self.gamesettings.scale))
+
+        self.brickBlocks.add(FloatBlock(1279, 72, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(1279+16, 72, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(1279+32, 72, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(1279+48, 72, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(1279+64, 72, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(1279+80, 72, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(1279+96, 72, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(1279+112, 72, 16, 16, 272, 112, self.gamesettings.scale))
+
+        self.brickBlocks.add(FloatBlock(1455, 72, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(1455+16, 72, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(1455+32, 72, 16, 16, 272, 112, self.gamesettings.scale))
+
+        self.brickBlocks.add(FloatBlock(1503, 136, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(1599, 136, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(1599+16, 136, 16, 16, 272, 112, self.gamesettings.scale))
+
+        self.brickBlocks.add(FloatBlock(1887, 136, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(1935, 72, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(1935+16, 72, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(1935+32, 72, 16, 16, 272, 112, self.gamesettings.scale))
+
+        self.brickBlocks.add(FloatBlock(2047, 72, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(2047+48, 72, 16, 16, 272, 112, self.gamesettings.scale))
+
+        self.brickBlocks.add(FloatBlock(2063, 136, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(2063+16, 136, 16, 16, 272, 112, self.gamesettings.scale))
+
+        self.brickBlocks.add(FloatBlock(2687, 136, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(2687+16, 136, 16, 16, 272, 112, self.gamesettings.scale))
+        self.brickBlocks.add(FloatBlock(2687+48, 136, 16, 16, 272, 112, self.gamesettings.scale))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     def update(self):
         self.checkCollision()
         self.player.update()
-        for brick in self.floatBricks:
+        for brick in self.coinBlocks:
+            brick.update()
+        for brick in self.brickBlocks:
             brick.update()
 
 
