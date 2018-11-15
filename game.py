@@ -96,7 +96,6 @@ class Game():
 
     # Blit everything to self.level then blit self.level
     def blit(self):
-        self.startscreen.blit()
         self.level.blit(self.background, self.gamesettings.camera, self.gamesettings.camera)
         for goomba in self.thegoomba:
             goomba.blitGoomba()
@@ -113,7 +112,6 @@ class Game():
         # /DEBUG
         self.coinBlocks.draw(self.level)
         self.brickBlocks.draw(self.level)
-        self.startscreen.blit()
         self.screen.blit(self.level, (0, 0), self.gamesettings.camera)
         self.stats.blitstats()
         pygame.display.flip()
