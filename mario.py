@@ -62,8 +62,8 @@ class Mario(Sprite):
         self.gravity = 1
         self.gravity_jump = .5
         self.vel_jump = 10
-        self.run_accel_x = 1.5
-        self.RUN_MAX = 6
+        self.run_accel_x = .6
+        self.RUN_MAX = 4
         self.MAX_WALK = 3
         self.run_walk_vel = -13
 
