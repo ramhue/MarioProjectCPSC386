@@ -50,6 +50,7 @@ class Mario(Sprite):
                            "Duck", "FaceLeft", "FaceRight",
                            "Falling"]
         self.current_state = "Stand"
+        self.running = False
 
         #Forces
         self.vel_x = 0
@@ -61,8 +62,8 @@ class Mario(Sprite):
         self.gravity = 1
         self.gravity_jump = .5
         self.vel_jump = 10
-        self.run_accel_x = 20
-        self.RUN_MAX = 80
+        self.run_accel_x = 1.5
+        self.RUN_MAX = 6
         self.MAX_WALK = 3
         self.run_walk_vel = -13
 
@@ -85,6 +86,18 @@ class Mario(Sprite):
                     self.vel_x = -1
             elif self.vel_x < (self.MAX_WALK * -1):
                 self.vel_x += self.walk_accel_x
+
+        if self.moveRight and self.running:
+            if self.vel_x < self.RUN_MAX:
+                self.vel_x += self.run_accel_x
+
+        if self.moveLeft and self.running:
+            if self.vel_x > (self.RUN_MAX* -1):
+                self.vel_x -= self.run_accel_x
+                if self.vel_x > -1:
+                    self.vel_x = -1
+            elif self.vel_x < (self.RUN_MAX * -1):
+                self.vel_x += self.run_accel_x
 
         if self.jumping:
             self.image = self.smallimages[5]
@@ -145,7 +158,6 @@ class Mario(Sprite):
 
         if self.death:
             self.image = self.smallimages[6]
-            self.image.rect.y -= 20
             #if pygame.time.get_ticks() > self.last + 200:
             self.reset()
             self.death = False

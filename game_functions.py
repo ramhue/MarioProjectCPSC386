@@ -20,6 +20,8 @@ def check_keydown_events(event, mario):
     if event.key == pygame.K_UP:
         mario.moving_up = True
         mario.cameraMove = True
+    if event.key == pygame.K_LSHIFT:
+        mario.running = True
     elif event.key == pygame.K_SPACE:
         mario.jumping = True
     elif event.key == pygame.K_DOWN:
@@ -47,6 +49,8 @@ def check_keyup_events(event, mario):
         mario.moving_down = False
     elif event.key == pygame.K_SPACE:
         pass
+    elif event.key == pygame.K_LSHIFT:
+        mario.running = False
 
     mario.vel_x = 0
 
