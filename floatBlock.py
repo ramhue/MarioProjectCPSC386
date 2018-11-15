@@ -25,8 +25,7 @@ class FloatBlock(Sprite):
         # Return to original position
         if self.rect.y < self.origY:
             self.rect.y += 2*self.scale
-        elif self.rect.y > self.origY:
-            self.rect.y -= 2*self.scale
+
 
 
 

@@ -96,7 +96,6 @@ class Game():
 
     # Blit everything to self.level then blit self.level
     def blit(self):
-        self.startscreen.blit()
         self.level.blit(self.background, self.gamesettings.camera, self.gamesettings.camera)
         for goomba in self.thegoomba:
             goomba.blitGoomba()
@@ -113,7 +112,6 @@ class Game():
         # /DEBUG
         self.coinBlocks.draw(self.level)
         self.brickBlocks.draw(self.level)
-        self.startscreen.blit()
         self.screen.blit(self.level, (0, 0), self.gamesettings.camera)
         self.stats.blitstats()
         pygame.display.flip()
@@ -122,7 +120,13 @@ class Game():
     def checkCollision(self):
         collided = pygame.sprite.spritecollide(self.player, self.pipes, False, False)
         for pipe in collided:
-            self.player.rect.bottom = pipe.rect.top
+            if self.player.rect.y < pipe.rect.top:
+                self.player.rect.bottom = pipe.rect.top
+            elif self.player.rect.x < pipe.rect.x:
+                self.player.rect.x -= 10
+            elif self.player.rect.x > pipe.rect.x:
+                self.player.rect.x += 10
+
         collided = pygame.sprite.spritecollide(self.player, self.steps, False, False)
         for step in collided:
             self.player.rect.bottom = step.rect.top
@@ -140,16 +144,23 @@ class Game():
         # Check mario collisions with enemies
         # if collide by side mario dies or loses 1 level
         # Mario will kill enemies if he jumps on them
+
         collided = pygame.sprite.spritecollide(self.player, self.thegoomba, False, False)
+        #for goomba in collided:
+
         for goomba in collided:
+            print(str(goomba.rect.top))
+            print("THis is Y: " + str(goomba.rect.y))
+            print("This is mario's y" + str(self.player.rect.y))
+            if self.player.rect.y < goomba.rect.top:
+                print("HELLOOOO")
+                goomba.death = True
+                goomba.kill()
+
             if self.player.rect.x >= goomba.rect.x:
+                print("dead")
                 self.player.death = True
                 self.player.rect.y -= self.gamesettings.gravity * 2
-
-        collided = pygame.sprite.spritecollide(self.player, self.thegoomba, True, False)
-        for goomba in collided:
-            if self.player.rect.bottom == goomba.rect.top:
-                goomba.death = True
 
         collided = pygame.sprite.spritecollide(self.player, self.thekoopa, False, False)
         for koopa in collided:
@@ -292,39 +303,6 @@ class Game():
         self.brickBlocks.add(FloatBlock(2687+16, 136, 16, 16, 272, 112, self.gamesettings.scale))
         self.brickBlocks.add(FloatBlock(2687+48, 136, 16, 16, 272, 112, self.gamesettings.scale))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     def update(self):
         self.checkCollision()
         self.player.update()
@@ -336,4 +314,5 @@ class Game():
 
 game = Game()
 game.play()
+
 
