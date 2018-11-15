@@ -29,7 +29,7 @@ class Mario(Sprite):
         self.rect = self.image.get_rect()
 
         # Set starting Y:
-        self.rect.y = 250
+        self.rect.y = 550
 
         self.moveLeft = False
         self.moveRight = False
@@ -114,6 +114,7 @@ class Mario(Sprite):
     def reset(self):
         self.rect.x, self.rect.y = 0, 550
         self.image = self.smallimages[0]
+        self.settings.camera.x = 0
 
     def blitMario(self):
         if self.moveRight:
@@ -144,8 +145,9 @@ class Mario(Sprite):
 
         if self.death:
             self.image = self.smallimages[6]
-            if pygame.time.get_ticks() > self.last + 200:
-                self.reset()
+            self.image.rect.y -= 20
+            #if pygame.time.get_ticks() > self.last + 200:
+            self.reset()
             self.death = False
 
         self.level.blit(self.image, self.rect)

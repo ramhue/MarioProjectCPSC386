@@ -39,9 +39,9 @@ class Goomba(Sprite):
     def update(self):
         super().update()
         if self.moveLeft:
-            self.rect.x -= 1
+            self.rect.x -= 2
         else:
-            self.rect.x += 1
+            self.rect.x += 2
         self.rect.y -= self.settings.gravity
 
     def blitGoomba(self):

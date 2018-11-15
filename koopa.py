@@ -31,7 +31,7 @@ class Koopa(Sprite):
 
     def update(self):
         super().update()
-        self.rect.x -= 1
+        self.rect.x -= 2
         self.rect.y -= self.settings.gravity
 
     def blitKoopa(self):
